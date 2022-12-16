@@ -1,0 +1,88 @@
+:root {
+  --clr-main: #3e0249;
+  --fz-basic: min(4.5vw, 20px);
+  --box-size: calc(var(--fz-basic) * 5);
+}
+
+.ttt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 2em;
+  font-size: var(--fz-basic);
+  color: var(--clr-main);
+}
+
+.ttt__title {
+  margin: 0 0 1.5em;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
+.ttt__btn {
+  padding: 0.5em 1em;
+  font: inherit;
+  color: #ffffff;
+  background: var(--clr-main);
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.ttt__btn:hover,
+.ttt__btn:focus-visible {
+  transform: translateY(-5%);
+}
+
+.ttt__restart {
+  margin: 0 0 2em;
+}
+
+.ttt__gameboard {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ttt__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--box-size);
+  height: var(--box-size);
+  font: inherit;
+  font-size: 3em;
+  line-height: 1;
+  color: inherit;
+  background-color: transparent;
+  border: 3px solid var(--clr-main);
+}
+
+.ttt__box:not(:empty) {
+  pointer-events: none;
+}
+
+.ttt__box:empty:hover,
+.ttt__box:empty:focus-visible {
+  background: #eeeeee;
+  outline: none;
+  cursor: pointer;
+}
+
+.ttt__box:nth-child(3n - 2) {
+  border-left: none;
+}
+
+.ttt__box:nth-child(3n) {
+  border-right: none;
+}
+
+.ttt__box:nth-child(n + 7) {
+  border-bottom: none;
+}
+
+.ttt__box:nth-last-child(n + 7) {
+  border-top: none;
+}
