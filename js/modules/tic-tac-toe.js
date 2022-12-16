@@ -36,28 +36,41 @@ const initTicTacToe = () => {
   const restartBtn = element.querySelector('#ttt-restart')
   const defaultInfo = infoElement.textContent
 
-  boxes.forEach((box, index) => {
-    box.addEventListener('click', () => {
-      if (currentCombination[index] != null) {
-        return
-      }
+  const initSteps = () => {
+    boxes.forEach((box, index) => {
+      box.addEventListener('click', () => {
+        if (currentCombination[index] != null) {
+          return
+        }
 
-      currentCombination[index] = currentPlayerValue
-      box.textContent = currentPlayerValue
+        currentCombination[index] = currentPlayerValue
+        box.textContent = currentPlayerValue
 
-      if (playerHasWon()) {
-        return
-      }
+        if (playerHasWon()) {
+          return
+        }
 
-      currentPlayerValue = currentPlayerValue === Value.O ? Value.X : Value.O
+        currentPlayerValue = currentPlayerValue === Value.O ? Value.X : Value.O
+      })
     })
-  })
+  }
+
+  const initRestart = () => {
+    restartBtn.addEventListener('click', () => {
+      currentCombination.fill(null)
+      infoElement.textContent = defaultInfo
+      boxes.forEach((box) => (box.textContent = ''))
+    })
+  }
+
+  initSteps()
+  initRestart()
 
   const playerHasWon = () => {
     for (let info in WinCombinations) {
       const winCombinations = WinCombinations[info]
       const hasCombination = winCombinations.some((winCombination) => {
-        return [...winCombination].every(
+        return winCombination.every(
           (value, index) => value === Value.TEMPLATE_OTHER || currentCombination[index] === currentPlayerValue
         )
       })
