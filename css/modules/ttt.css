@@ -86,3 +86,7 @@
 .ttt__box:nth-last-child(n + 7) {
   border-top: none;
 }
+
+.ttt__box * {
+  pointer-events: none;
+}
