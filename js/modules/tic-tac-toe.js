@@ -10,22 +10,18 @@ const initTicTacToe = () => {
 
   let currentPlayerValue = Value.O
   const currentCombination = new Array(9).fill(null)
+  const W = Value.TEMPLATE_WINNER
+  const O = Value.TEMPLATE_OTHER
   const WinCombinations = {
-    ON_THE_TOP: [`${Value.TEMPLATE_WINNER.repeat(3)}${Value.TEMPLATE_OTHER.repeat(6)}`],
-    ON_THE_BOTTOM: [`${Value.TEMPLATE_OTHER.repeat(6)}${Value.TEMPLATE_WINNER.repeat(3)}`],
-    ON_THE_LEFT: [`${Value.TEMPLATE_WINNER}${Value.TEMPLATE_OTHER.repeat(2)}`.repeat(3)],
-    ON_THE_RIGHT: [`${Value.TEMPLATE_OTHER.repeat(2)}${Value.TEMPLATE_WINNER}`.repeat(3)],
-    VERTICALLY_IN_THE_MIDDLE: [`${Value.TEMPLATE_OTHER}${Value.TEMPLATE_WINNER}${Value.TEMPLATE_OTHER}`.repeat(3)],
-    HORIZONTALLY_IN_THE_MIDDLE: [
-      `${Value.TEMPLATE_OTHER.repeat(3)}${Value.TEMPLATE_WINNER.repeat(3)}${Value.TEMPLATE_OTHER.repeat(3)}`,
-    ],
+    ON_THE_TOP: [[W, W, W, O, O, O, O, O, O]],
+    ON_THE_BOTTOM: [[O, O, O, O, O, O, W, W, W]],
+    ON_THE_LEFT: [[W, O, O, W, O, O, W, O, O]],
+    ON_THE_RIGHT: [[O, O, W, O, O, W, O, O, W]],
+    VERTICALLY_IN_THE_MIDDLE: [[O, W, O, O, W, O, O, W, O]],
+    HORIZONTALLY_IN_THE_MIDDLE: [[O, O, O, W, W, W, O, O, O]],
     DIAGONALLY: [
-      `${Value.TEMPLATE_WINNER}${Value.TEMPLATE_OTHER.repeat(3)}${Value.TEMPLATE_WINNER}${Value.TEMPLATE_OTHER.repeat(
-        3
-      )}${Value.TEMPLATE_WINNER}`,
-      `${Value.TEMPLATE_OTHER.repeat(2)}${Value.TEMPLATE_WINNER}${Value.TEMPLATE_OTHER}${Value.TEMPLATE_WINNER}${
-        Value.TEMPLATE_OTHER
-      }${Value.TEMPLATE_WINNER}${Value.TEMPLATE_OTHER.repeat(2)}`,
+      [W, O, O, O, W, O, O, O, W],
+      [O, O, W, O, W, O, W, O, O],
     ],
   }
 
@@ -35,9 +31,9 @@ const initTicTacToe = () => {
     return
   }
 
+  const boxes = element.querySelectorAll('[id^="ttt-box"]')
   const infoElement = element.querySelector('#ttt-info')
   const restartBtn = element.querySelector('#ttt-restart')
-  const boxes = element.querySelectorAll('[id^="ttt-box"]')
   const defaultInfo = infoElement.textContent
 
   boxes.forEach((box, index) => {
