@@ -71,6 +71,21 @@
   cursor: pointer;
 }
 
+.ttt__box:empty:hover::before,
+.ttt__box:empty:focus-visible::before {
+  opacity: 0.5;
+}
+
+[data-current-player-value='O'] .ttt__box:empty:hover::before,
+[data-current-player-value='O'] .ttt__box:empty:focus-visible::before {
+  content: 'O';
+}
+
+[data-current-player-value='X'] .ttt__box:empty:hover::before,
+[data-current-player-value='X'] .ttt__box:empty:focus-visible::before {
+  content: 'X';
+}
+
 .ttt__box:nth-child(3n - 2) {
   border-left: none;
 }

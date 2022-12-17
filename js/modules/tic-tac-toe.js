@@ -8,7 +8,7 @@ const initTicTacToe = () => {
     TEMPLATE_OTHER: '-',
   }
 
-  let currentPlayerValue = Value.O
+  let currentPlayerValue
   const currentCombination = new Array(9).fill(null)
   const W = Value.TEMPLATE_WINNER
   const O = Value.TEMPLATE_OTHER
@@ -31,6 +31,7 @@ const initTicTacToe = () => {
     return
   }
 
+  const gameBoard = element.querySelector('[id="ttt-gameboard"]')
   const boxes = element.querySelectorAll('[id^="ttt-box"]')
   const infoElement = element.querySelector('#ttt-info')
   const restartBtn = element.querySelector('#ttt-restart')
@@ -50,7 +51,7 @@ const initTicTacToe = () => {
           return
         }
 
-        currentPlayerValue = currentPlayerValue === Value.O ? Value.X : Value.O
+        swapCurrentPlayerValue()
       })
     })
   }
@@ -63,6 +64,12 @@ const initTicTacToe = () => {
     })
   }
 
+  const swapCurrentPlayerValue = () => {
+    currentPlayerValue = currentPlayerValue === Value.O ? Value.X : Value.O
+    gameBoard.dataset.currentPlayerValue = currentPlayerValue
+  }
+
+  swapCurrentPlayerValue()
   initSteps()
   initRestart()
 
