@@ -9,7 +9,7 @@ const initTicTacToe = () => {
   }
 
   let currentPlayerValue
-  const currentCombination = new Array(9).fill(null)
+  const currentCombination = new Array(9)
   const W = Value.TEMPLATE_WINNER
   const O = Value.TEMPLATE_OTHER
   const WinCombinations = {
@@ -51,16 +51,28 @@ const initTicTacToe = () => {
           return
         }
 
+        if (isDraw()) {
+          infoElement.textContent = 'Draw!'
+          return
+        }
+
         swapCurrentPlayerValue()
       })
     })
   }
 
+  const isDraw = () => currentCombination.filter(Boolean).length === 9
+
+  const restart = () => {
+    currentCombination.fill(null)
+    infoElement.textContent = defaultInfo
+    boxes.forEach((box) => (box.textContent = ''))
+    swapCurrentPlayerValue()
+  }
+
   const initRestart = () => {
     restartBtn.addEventListener('click', () => {
-      currentCombination.fill(null)
-      infoElement.textContent = defaultInfo
-      boxes.forEach((box) => (box.textContent = ''))
+      restart()
     })
   }
 
@@ -69,7 +81,7 @@ const initTicTacToe = () => {
     gameBoard.dataset.currentPlayerValue = currentPlayerValue
   }
 
-  swapCurrentPlayerValue()
+  restart()
   initSteps()
   initRestart()
 
@@ -84,6 +96,7 @@ const initTicTacToe = () => {
 
       if (hasCombination) {
         infoElement.textContent = `${currentPlayerValue} has won ${getStringWithoutConstantCase(info)}.`
+        return true
       }
     }
   }
